@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Ziyaretçi QR Kodu{% endblock %}
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow text-center">
+                <div class="card-body">
+                    <h2 class="card-title mb-4">Ziyaretçi QR Kodu</h2>
+                    <p><strong>Ad:</strong> {{ visitor.name }}<br>
+                    <strong>Soyad:</strong> {{ visitor.surname }}<br>
+                    <strong>Ziyaret Tarihi:</strong> {{ visitor.visit_date }}<br>
+                    <strong>Ziyaret Süresi:</strong> {{ visitor.visit_duration }} dakika</p>
+                    <img src="data:image/png;base64,{{ img_b64 }}" alt="QR Kod" class="mb-3" style="width:200px; height:200px;">
+                    <br>
+                    <a href="/" class="btn btn-link mt-3">Geri Dön</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %} 

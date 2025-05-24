@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block title %}Ziyaretçi Detay{% endblock %}
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow mb-4">
+                <div class="card-body">
+                    <h2 class="card-title mb-4">Ziyaretçi Detay</h2>
+                    <dl class="row">
+                        <dt class="col-sm-3">Ad</dt>
+                        <dd class="col-sm-9">{{ visitor.name }}</dd>
+                        <dt class="col-sm-3">Soyad</dt>
+                        <dd class="col-sm-9">{{ visitor.surname }}</dd>
+                        <dt class="col-sm-3">Giriş Tarihi</dt>
+                        <dd class="col-sm-9">{{ visitor.visit_date }}</dd>
+                        <dt class="col-sm-3">Çıkış Tarihi</dt>
+                        <dd class="col-sm-9">{{ visitor.exit_date if visitor.exit_date else '-' }}</dd>
+                        <dt class="col-sm-3">Ziyaret Süresi (dk)</dt>
+                        <dd class="col-sm-9">{{ visitor.visit_duration }}</dd>
+                        <dt class="col-sm-3">QR Kod</dt>
+                        <dd class="col-sm-9"><a href="/visitor/{{ visitor.id }}/qrcode" class="btn btn-sm btn-secondary">QR Kodunu Görüntüle</a></dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="card shadow">
+                <div class="card-body">
+                    <h4 class="card-title mb-3">Geçmiş Ziyaretler</h4>
+                    {% if past_visits %}
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Giriş Tarihi</th>
+                                <th>Çıkış Tarihi</th>
+                                <th>Ziyaret Süresi (dk)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for v in past_visits %}
+                            <tr>
+                                <td>{{ v.visit_date }}</td>
+                                <td>{{ v.exit_date if v.exit_date else '-' }}</td>
+                                <td>{{ v.visit_duration }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                        <p>Bu ziyaretçiye ait başka kayıt yok.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %} 

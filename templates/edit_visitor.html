@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}Ziyaretçi Düzenle{% endblock %}
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h2 class="card-title mb-4">Ziyaretçi Düzenle</h2>
+                    <form method="post">
+                        <div class="mb-3">
+                            <label class="form-label">Ad:</label>
+                            <input type="text" name="name" value="{{ visitor.name }}" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Soyad:</label>
+                            <input type="text" name="surname" value="{{ visitor.surname }}" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Giriş Tarihi ve Saati:</label>
+                            <input type="datetime-local" name="visit_date" value="{{ visitor.visit_date.strftime('%Y-%m-%dT%H:%M') }}" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Çıkış Tarihi ve Saati:</label>
+                            <input type="datetime-local" name="exit_date" value="{{ visitor.exit_date.strftime('%Y-%m-%dT%H:%M') if visitor.exit_date else '' }}" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Ziyaret Süresi (dakika):</label>
+                            <input type="number" class="form-control" value="{{ visitor.visit_duration }}" readonly>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Kaydet</button>
+                    </form>
+                    <a href="/" class="btn btn-link mt-3">Geri Dön</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %} 

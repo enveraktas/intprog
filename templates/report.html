@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Ziyaretçi Raporları{% endblock %}
+{% block content %}
+    <h2 class="mb-4">Günlük Ziyaretçi Yoğunluğu</h2>
+    <canvas id="dailyChart" height="100"></canvas>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('dailyChart').getContext('2d');
+        const dailyChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: {{ labels|tojson }},
+                datasets: [{
+                    label: 'Ziyaretçi Sayısı',
+                    data: {{ counts|tojson }},
+                    backgroundColor: 'rgba(54, 162, 235, 0.7)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        stepSize: 1
+                    }
+                }
+            }
+        });
+    </script>
+{% endblock %} 

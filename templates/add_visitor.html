@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Ziyaretçi Ekle{% endblock %}
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h2 class="card-title mb-4">Yeni Ziyaretçi Ekle</h2>
+                    <form method="post">
+                        <div class="mb-3">
+                            <label class="form-label">Ad:</label>
+                            <input type="text" name="name" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Soyad:</label>
+                            <input type="text" name="surname" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Giriş Tarihi ve Saati:</label>
+                            <input type="datetime-local" name="visit_date" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn-success w-100">Kaydet</button>
+                    </form>
+                    <a href="/" class="btn btn-link mt-3">Geri Dön</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %} 
