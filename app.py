@@ -7,6 +7,7 @@ import base64
 import uuid
 from functools import wraps
 from sqlalchemy import func
+import os
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///visitors.db'
@@ -30,6 +31,7 @@ class Admin(db.Model):
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
 
 def login_required(f):
     @wraps(f)
@@ -185,5 +187,3 @@ def visitor_detail(id):
         Visitor.id != visitor.id
     ).order_by(Visitor.visit_date.desc()).all()
     return render_template('visitor_detail.html', visitor=visitor, past_visits=past_visits)
-
-app.run(debug=True)
